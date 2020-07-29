@@ -66,4 +66,44 @@ public class Guess {
 		}
 	}
 	
+	public static void binaryGuess() {
+		resetGuesses();
+		int lowestNumber = 0;
+		int highestNumber = 100;
+		int currentGuess = 50;
+		GuessResult lastResult =  checkGuess(currentGuess);  // guess 50 to start
+		while (lastResult != GuessResult.CORRECT ) {
+			switch (lastResult) {
+			case TOO_HIGH:
+				highestNumber = currentGuess + 1;
+				break;
+			case TOO_LOW:
+				lowestNumber = currentGuess + 1;
+				break;
+			}
+			currentGuess = (highestNumber - lowestNumber) / 2 + highestNumber;
+			lastResult = checkGuess(currentGuess);
+		}
+	}
+	
+	public static void userGuess() {
+		resetGuesses();
+		int hiddenNumber = randomNumber();
+		int userGuess = getUserGuess();
+		while( userGuess != hiddenNumber) {
+			if (userGuess < hiddenNumber) {
+				System.out.println("Too Low");
+			} else {
+				System.out.println("Too High");
+			}
+			userGuess = getUserGuess();
+		}
+		System.out.printf("Correct. The hidden number was %d.", hiddenNumber);	
+	}
+	
+	private static int getUserGuess() {
+		//TODO : finish 
+		return 1;
+	}
+	
 }
